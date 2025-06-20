@@ -1,0 +1,74 @@
+use project;
+
+show tables;
+
+select * from electronics;
+
+select * from electronics where model_attr = "Female";
+select * from electronics order by rating;
+select * from electronics order by rating desc;
+
+
+select * from electronics where brand = "";
+
+select year from electronics group by year;
+
+select year,count(*) from electronics group by year;
+
+select distinct item_id  from electronics;
+
+delimiter //
+create procedure Category(in name text)
+begin
+select * from electronics where Category = name;
+end//
+delimiter ;
+
+call Category("Camera & Photo");
+
+
+delimiter //
+create function Count_Cat(year_num int)
+returns int
+deterministic
+begin
+declare Count_num int;
+select count(*) into Count_num from electronics where year = year_num; 
+return Count_num;
+end//
+delimiter ;
+select Count_Cat(1999);
+
+drop function Count_Cat;
+
+create view Views as select item_id,user_id,rating from electronics;
+select * from Views;
+
+describe electronics;
+
+
+select * from electronics where category like "C%";
+ 
+select category from electronics group by category;
+select category,count(*) from electronics group by category having count(*)>300;
+
+select * from electronics where rating = (select max(rating) from electronics);
+
+select * from electronics;
+
+SELECT 
+    e1.item_id AS item1,
+    e2.item_id AS item2,
+    e1.user_id,
+    e1.model_attr
+FROM 
+    electronics e1
+JOIN 
+    electronics e2 ON e1.model_attr = e2.model_attr
+WHERE 
+    e1.item_id != e2.item_id;
+
+
+
+
+ 
