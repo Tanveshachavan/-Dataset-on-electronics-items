@@ -38,5 +38,3 @@ The project uses a dataset of electronic items including attributes such as:
 - **Functions**: e.g., count products released in a given year.
 - **Views**: created to display simplified subsets like `item_id`, `user_id`, and `rating`.
 
-## 📂 Folder Structure
-
